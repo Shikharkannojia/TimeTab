@@ -56,40 +56,46 @@ class Monday : Fragment() {
 
         val database = FirebaseDatabase.getInstance()
         val myRef = database.getReference("App")
-//        myRef.setValue("Hello world!!!")
-//        myRef.child("Hello world!!!").child("name").setValue("xyz")
 
         val list: ArrayList<Period> = ArrayList()
-        for(i in 1..6){
-            val str = "P$i"
-            var name = ""
-            var room = ""
-            var teacher = ""
-            var time = ""
+        val p1 = Period("Data Mining", "403", "Dr. Mugdha", "9:30 - 11:10")
+        val p2 = Period("IS Lab (G1)", "108B", "Dr. Charu", "11:10 - 12:50")
+        val p3 = Period("DM Lab (G2)", "108C", "Dr. Mugdha", "11:10 - 12:50")
+        val p4 = Period("Information Security", "112", "Dr. Charu", "1:40 - 3:20")
+        val p5 = Period("Mentor Mentee Meeting", "108", "Mentor", "3:20 - 4:10")
+        val p6 = Period("Library", "Lib", "Library Assistant", "4:10 - 5:00")
 
-            myRef.child("TimeTable").child("Monday").child(str).get().addOnSuccessListener {
-                name = it.child("Name").value.toString()
-                room = it.child("Room").value.toString()
-                teacher = it.child("Teacher").value.toString()
-                time = it.child("Time").value.toString()
-                val p1 = Period(name,room,teacher,time)
-                println("___________________" + p1.name + ", " + p1.room + ", " + p1.teacher + ", " + p1.time)
-                list.add(p1)
-            }
-        }
-//        myRef.child("Hello world!!!").child("name").get().addOnSuccessListener {
-//            Log.i("firebase", "Got value ${it.value}")
-//        }.addOnFailureListener{
-//            Log.e("firebase", "Error getting data", it)
+        list.add(p1); list.add(p2); list.add(p3); list.add(p4); list.add(p5); list.add(p6)
+//        for(i in 1..6){
+//            val str = "P$i"
+//            var name = ""
+//            var room = ""
+//            var teacher = ""
+//            var time = ""
+//
+//            myRef.child("TimeTable").child("Monday").child(str).get().addOnSuccessListener {
+//                name = it.child("Name").value.toString()
+//                room = it.child("Room").value.toString()
+//                teacher = it.child("Teacher").value.toString()
+//                time = it.child("Time").value.toString()
+//                val p1 = Period(name,room,teacher,time)
+//                println("___________________" + p1.name + ", " + p1.room + ", " + p1.teacher + ", " + p1.time)
+//                list.add(p1)
+//            }
 //        }
 
-        myRef.child("TimeTable").child("Monday").get().addOnSuccessListener {
-            println(list)
-            recyclerAdapter =
-                MainRecyclerAdapter(activity as Context, list)
-            recyclerHome.adapter = recyclerAdapter
-            recyclerHome.layoutManager = layoutManager
-        }
+//        myRef.child("TimeTable").child("Monday").get().addOnSuccessListener {
+//            println(list)
+//            recyclerAdapter =
+//                MainRecyclerAdapter(activity as Context, list)
+//            recyclerHome.adapter = recyclerAdapter
+//            recyclerHome.layoutManager = layoutManager
+//        }
+
+        recyclerAdapter =
+            MainRecyclerAdapter(activity as Context, list)
+        recyclerHome.adapter = recyclerAdapter
+        recyclerHome.layoutManager = layoutManager
 
         return view
     }
