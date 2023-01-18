@@ -1,11 +1,17 @@
 package com.bpitindia.myapplication.ui.ui.fragments
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bpitindia.myapplication.R
+import com.bpitindia.myapplication.entity.Period
+import com.bpitindia.myapplication.recyclerview.MainRecyclerAdapter
+import com.google.firebase.database.FirebaseDatabase
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +27,9 @@ class Friday : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var recyclerHome: RecyclerView
+    private lateinit var layoutManager: RecyclerView.LayoutManager
+    private lateinit var recyclerAdapter: MainRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +44,50 @@ class Friday : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_friday, container, false)
+        val view = inflater.inflate(R.layout.fragment_friday, container, false)
+        recyclerHome = view.findViewById(R.id.recyclerHome)
+        layoutManager = LinearLayoutManager(activity)
+
+//        val database = FirebaseDatabase.getInstance()
+//        val myRef = database.getReference("App")
+//        myRef.setValue("Hello world!!!")
+//        myRef.child("Hello world!!!").child("name").setValue("xyz")
+
+        val list: ArrayList<Period> = ArrayList()
+        val p1 = Period("Minor Project", "__", "Mentor", "9:30 - 12:50")
+        val p2 = Period("Minor Project", "__", "Mentor", "1:40 - 5:00")
+
+        list.add(p1); list.add(p2);
+//        for(i in 1..6){
+//            val str = "P$i"
+//            var name = ""
+//            var room = ""
+//            var teacher = ""
+//            var time = ""
+//
+//
+//            myRef.child("TimeTable").child("Friday").child(str).get().addOnSuccessListener {
+//                name = it.child("Name").value.toString()
+//                room = it.child("Room").value.toString()
+//                teacher = it.child("Teacher").value.toString()
+//                time = it.child("Time").value.toString()
+//                val p1 = Period(name,room,teacher,time)
+//                println("___________________" + name + ", " + p1.room + ", " + p1.teacher + ", " + p1.time)
+//                list.add(p1)
+//            }
+//
+//        }
+//        myRef.child("Hello world!!!").child("name").get().addOnSuccessListener {
+//            Log.i("firebase", "Got value ${it.value}")
+//        }.addOnFailureListener{
+//            Log.e("firebase", "Error getting data", it)
+//        }
+
+        recyclerAdapter =
+            MainRecyclerAdapter(activity as Context, list)
+        recyclerHome.adapter = recyclerAdapter
+        recyclerHome.layoutManager = layoutManager
+        return view
     }
 
     companion object {
