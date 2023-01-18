@@ -38,6 +38,7 @@ class TimeTable : AppCompatActivity() {
                 .replace(R.id.frame, Monday()).commit()
         }
 
+        monday.setTextColor(Color.BLACK)
         monday.setOnClickListener {
             monday.setTextColor(Color.BLACK)
             tuesday.setTextColor(Color.parseColor("#009688"))

@@ -48,31 +48,35 @@ class Friday : Fragment() {
         recyclerHome = view.findViewById(R.id.recyclerHome)
         layoutManager = LinearLayoutManager(activity)
 
-        val database = FirebaseDatabase.getInstance()
-        val myRef = database.getReference("App")
+//        val database = FirebaseDatabase.getInstance()
+//        val myRef = database.getReference("App")
 //        myRef.setValue("Hello world!!!")
 //        myRef.child("Hello world!!!").child("name").setValue("xyz")
 
         val list: ArrayList<Period> = ArrayList()
-        for(i in 1..6){
-            val str = "P$i"
-            var name = ""
-            var room = ""
-            var teacher = ""
-            var time = ""
+        val p1 = Period("Minor Project", "__", "Mentor", "9:30 - 12:50")
+        val p2 = Period("Minor Project", "__", "Mentor", "1:40 - 5:00")
 
-
-            myRef.child("TimeTable").child("Monday").child(str).get().addOnSuccessListener {
-                name = it.child("Name").value.toString()
-                room = it.child("Room").value.toString()
-                teacher = it.child("Teacher").value.toString()
-                time = it.child("Time").value.toString()
-                val p1 = Period(name,room,teacher,time)
-                println("___________________" + name + ", " + p1.room + ", " + p1.teacher + ", " + p1.time)
-                list.add(p1)
-            }
-
-        }
+        list.add(p1); list.add(p2);
+//        for(i in 1..6){
+//            val str = "P$i"
+//            var name = ""
+//            var room = ""
+//            var teacher = ""
+//            var time = ""
+//
+//
+//            myRef.child("TimeTable").child("Friday").child(str).get().addOnSuccessListener {
+//                name = it.child("Name").value.toString()
+//                room = it.child("Room").value.toString()
+//                teacher = it.child("Teacher").value.toString()
+//                time = it.child("Time").value.toString()
+//                val p1 = Period(name,room,teacher,time)
+//                println("___________________" + name + ", " + p1.room + ", " + p1.teacher + ", " + p1.time)
+//                list.add(p1)
+//            }
+//
+//        }
 //        myRef.child("Hello world!!!").child("name").get().addOnSuccessListener {
 //            Log.i("firebase", "Got value ${it.value}")
 //        }.addOnFailureListener{
