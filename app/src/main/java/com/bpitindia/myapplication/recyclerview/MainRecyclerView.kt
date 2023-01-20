@@ -5,8 +5,10 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bpitindia.myapplication.ActivityLeave
 import com.bpitindia.myapplication.R
@@ -27,8 +29,8 @@ class MainRecyclerAdapter(
         var room: TextView = view.findViewById(R.id.room)
         var time: TextView = view.findViewById(R.id.time)
         val cardlecture = view.findViewById(R.id.cardviewlecture) as CardView
-
-
+        val sideMenu: ImageView = view.findViewById(R.id.side_menu)
+        val lectureView: ConstraintLayout = view.findViewById(R.id.lectureview)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
@@ -44,6 +46,10 @@ class MainRecyclerAdapter(
         holder.room.text = "Room ${itemList[position].room}"
         holder.time.text = itemList[position].time
 
+        holder.lectureView.setOnClickListener {
+            val intent = Intent(context, ActivityLeave::class.java)
+            context.startActivity(intent)
+        }
        /* holder.cardlecture.setOnClickListener {
             val intent = Intent(this@MainRecyclerAdapter, ActivityLeave::class.java )
             intent.putExtra("lecture", itemList[position])
