@@ -16,4 +16,40 @@
     <string name="time">• 9:15 – 10:00</string>
     <string name="teacher">Teacher</string>
     <string name="room">Room 103</string>
+    <string name="title_activity_leave">LeaveActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string-array name="teachers">
+        <item>Dr. Mugdha Sharma</item>
+        <item>Mr. Dinesh Bhardwaj</item>
+        <item>Dr. Charu gupta</item>
+        <item>Dr. Vishal Khatri</item>
+        <item>Ms Deepti</item>
+
+
+
+    </string-array>
+
+    <string-array name="days">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+    </string-array>
+    <string-array name="time">
+        <item>09:30 - 10:20</item>
+        <item>10:20 - 11:10</item>
+        <item>12:00 - 12:50</item>
+        <item>01:40 - 02:30</item>
+        <item>02:30 - 03:20</item>
+        <item>03:20 - 04:10</item>
+        <item>04:10 - 05:00</item>
+    </string-array>
 </resources>

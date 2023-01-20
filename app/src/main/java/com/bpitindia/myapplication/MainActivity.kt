@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
-        binding.appBarMain.fab.setOnClickListener { view ->
+        binding.appBarMain.fab.setOnClickListener { _ ->
             val intent = Intent(this@MainActivity, TimeTable::class.java)
             startActivity(intent)
         }

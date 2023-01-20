@@ -12,10 +12,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bpitindia.myapplication.R
 import com.bpitindia.myapplication.entity.Period
 import com.bpitindia.myapplication.recyclerview.MainRecyclerAdapter
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+//import com.google.firebase.database.DataSnapshot
+//import com.google.firebase.database.DatabaseError
+//import com.google.firebase.database.FirebaseDatabase
+//import com.google.firebase.database.ValueEventListener
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -54,9 +54,9 @@ class Monday : Fragment() {
         recyclerHome = view.findViewById(R.id.recyclerHome)
         layoutManager = LinearLayoutManager(activity)
 
-        val database = FirebaseDatabase.getInstance()
+    /*    val database = FirebaseDatabase.getInstance()
         val myRef = database.getReference("App")
-
+*/
         val list: ArrayList<Period> = ArrayList()
         val p1 = Period("Data Mining", "403", "Dr. Mugdha", "9:30 - 11:10")
         val p2 = Period("IS Lab (G1)", "108B", "Dr. Charu", "11:10 - 12:50")

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bpitindia.myapplication.R
 import com.bpitindia.myapplication.entity.Period
 import com.bpitindia.myapplication.recyclerview.MainRecyclerAdapter
-import com.google.firebase.database.FirebaseDatabase
+//import com.google.firebase.database.FirebaseDatabase
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
