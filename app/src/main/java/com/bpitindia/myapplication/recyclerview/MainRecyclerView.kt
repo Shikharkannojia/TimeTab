@@ -45,7 +45,7 @@ class MainRecyclerAdapter(
         holder.name.text = subject.name
         holder.teacher.text = subject.teacher
         holder.room.text = "Room ${subject.room}"
-        holder.time.text = subject.time
+        holder.time.text = "${subject.startTime.hour}:${subject.startTime.minute} - ${subject.endTime.hour}:${subject.endTime.minute}"
 
 //        holder.name.text = itemList[position].name
 //        holder.teacher.text = itemList[position].teacher

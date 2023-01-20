@@ -14,6 +14,8 @@ import com.bpitindia.myapplication.entity.Period
 import com.bpitindia.myapplication.data.MondayLectures
 import com.bpitindia.myapplication.ui.ui.fragments.Monday
 import com.bpitindia.myapplication.recyclerview.MainRecyclerAdapter
+import java.time.LocalTime
+
 //import com.google.firebase.database.DataSnapshot
 //import com.google.firebase.database.DatabaseError
 //import com.google.firebase.database.FirebaseDatabase
@@ -60,6 +62,7 @@ class Monday : Fragment() {
         val myRef = database.getReference("App")
 */
 
+//        val currentTime = LocalTime.of(9,0)
         val list = MondayLectures().loadLectures()
 
 //        val p1 = Period("Data Mining", "403", "Dr. Mugdha", "9:30 - 11:10")

@@ -33,8 +33,16 @@ class ActivityLeave: AppCompatActivity() {
         binding.resultbtn.setOnClickListener {
 
           //  val intent = Intent(this, MainActivity::class.java)
+
+
+
+
+
+
+
+            binding.result.text="Hello"
         }
-        binding.result.text="Hello"
+
 
     }
 }
