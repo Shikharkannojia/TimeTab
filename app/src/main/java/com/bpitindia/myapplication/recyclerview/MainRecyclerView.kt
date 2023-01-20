@@ -16,7 +16,7 @@ import com.bpitindia.myapplication.entity.Period
 
 class MainRecyclerAdapter(
     val context: Context,
-    private val itemList: ArrayList<Period>
+    private val itemList: List<Period>
 ) : RecyclerView.Adapter<MainRecyclerAdapter.MainViewHolder>() {
     private var timeInMillis: Long = 0L
     class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -41,10 +41,16 @@ class MainRecyclerAdapter(
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
 //        holder.scheduleDate.text = itemList[position].scheduleDate
-        holder.name.text = itemList[position].name
-        holder.teacher.text = itemList[position].teacher
-        holder.room.text = "Room ${itemList[position].room}"
-        holder.time.text = itemList[position].time
+        val subject = itemList[position]
+        holder.name.text = subject.name
+        holder.teacher.text = subject.teacher
+        holder.room.text = "Room ${subject.room}"
+        holder.time.text = subject.time
+
+//        holder.name.text = itemList[position].name
+//        holder.teacher.text = itemList[position].teacher
+//        holder.room.text = "Room ${itemList[position].room}"
+//        holder.time.text = itemList[position].time
 
         holder.lectureView.setOnClickListener {
             val intent = Intent(context, ActivityLeave::class.java)

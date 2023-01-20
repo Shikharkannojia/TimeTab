@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bpitindia.myapplication.R
+import com.bpitindia.myapplication.data.ThursdayLectures
 import com.bpitindia.myapplication.entity.Period
 import com.bpitindia.myapplication.recyclerview.MainRecyclerAdapter
 //import com.google.firebase.database.FirebaseDatabase
@@ -53,14 +54,14 @@ class Thursday : Fragment() {
 //        myRef.setValue("Hello world!!!")
 //        myRef.child("Hello world!!!").child("name").setValue("xyz")
 
-        val list: ArrayList<Period> = ArrayList()
-        val p1 = Period("ST", "SH1-B", "Dr. Vishal", "9:30 - 11:10")
-        val p2 = Period("ST Lab (G1)", "110", "Dr. Vishal", "11:10 - 12:50")
-        val p3 = Period("WC Lab (G2)", "108A", "Dr. Dinesh", "11:10 - 12:50")
-        val p4 = Period("ADBMS", "404", "Ms. Deepti", "1:40 - 3:20")
-        val p5 = Period("Minor Project", "__", "Mentor", "3:20 - 5:00")
+        val list = ThursdayLectures().loadLectures()
+//        val p1 = Period("ST", "SH1-B", "Dr. Vishal", "9:30 - 11:10")
+//        val p2 = Period("ST Lab (G1)", "110", "Dr. Vishal", "11:10 - 12:50")
+//        val p3 = Period("WC Lab (G2)", "108A", "Dr. Dinesh", "11:10 - 12:50")
+//        val p4 = Period("ADBMS", "404", "Ms. Deepti", "1:40 - 3:20")
+//        val p5 = Period("Minor Project", "__", "Mentor", "3:20 - 5:00")
 
-        list.add(p1); list.add(p2); list.add(p3); list.add(p4); list.add(p5);
+//        list.add(p1); list.add(p2); list.add(p3); list.add(p4); list.add(p5);
 //        for(i in 1..6){
 //            val str = "P$i"
 //            var name = ""

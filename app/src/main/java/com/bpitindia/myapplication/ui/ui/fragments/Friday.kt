@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bpitindia.myapplication.R
+import com.bpitindia.myapplication.data.FridayLectures
 import com.bpitindia.myapplication.entity.Period
 import com.bpitindia.myapplication.recyclerview.MainRecyclerAdapter
 //import com.google.firebase.database.FirebaseDatabase
@@ -53,11 +54,11 @@ class Friday : Fragment() {
 //        myRef.setValue("Hello world!!!")
 //        myRef.child("Hello world!!!").child("name").setValue("xyz")
 
-        val list: ArrayList<Period> = ArrayList()
-        val p1 = Period("Minor Project", "__", "Mentor", "9:30 - 12:50")
-        val p2 = Period("Minor Project", "__", "Mentor", "1:40 - 5:00")
+        val list = FridayLectures().loadLectures()
+//        val p1 = Period("Minor Project", "__", "Mentor", "9:30 - 12:50")
+//        val p2 = Period("Minor Project", "__", "Mentor", "1:40 - 5:00")
 
-        list.add(p1); list.add(p2);
+//        list.add(p1); list.add(p2);
 //        for(i in 1..6){
 //            val str = "P$i"
 //            var name = ""
