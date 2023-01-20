@@ -57,6 +57,7 @@ class Monday : Fragment() {
     /*    val database = FirebaseDatabase.getInstance()
         val myRef = database.getReference("App")
 */
+
         val list: ArrayList<Period> = ArrayList()
         val p1 = Period("Data Mining", "403", "Dr. Mugdha", "9:30 - 11:10")
         val p2 = Period("IS Lab (G1)", "108B", "Dr. Charu", "11:10 - 12:50")
