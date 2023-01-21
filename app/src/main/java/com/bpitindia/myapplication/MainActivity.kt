@@ -12,6 +12,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
+import com.bpitindia.myapplication.data.AllTeachers
 import com.bpitindia.myapplication.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -21,11 +23,24 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setSupportActionBar(binding.appBarMain.toolbar)
+
+
+        val teacherData = AllTeachers().loadTeachers()
+
+
+
+
+
+
+
+
+
+
+
+
 
         binding.appBarMain.fab.setOnClickListener { _ ->
             val intent = Intent(this@MainActivity, TimeTable::class.java)
