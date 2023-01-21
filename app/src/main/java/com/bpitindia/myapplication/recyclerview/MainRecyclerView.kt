@@ -54,6 +54,10 @@ class MainRecyclerAdapter(
 
         holder.lectureView.setOnClickListener {
             val intent = Intent(context, ActivityLeave::class.java)
+            intent.putExtra("teacher", subject.teacher)
+            intent.putExtra("subject", subject.name)
+            intent.putExtra("startTime", subject.startTime)
+            intent.putExtra("endTime", subject.endTime)
             context.startActivity(intent)
         }
        /* holder.cardlecture.setOnClickListener {

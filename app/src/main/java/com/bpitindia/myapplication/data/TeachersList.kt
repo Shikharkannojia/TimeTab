@@ -35,7 +35,7 @@ class TeachersList {
     fun loadADBMSTeachers() : List<Teacher> {
         return listOf(
             //Advanced DBMS
-            Teacher("Dr . Dipti", "Advanced DBMS", true),
+            Teacher("Ms. Deepti", "Advanced DBMS", true),
             Teacher("Dr. G", "Advanced DBMS", true),
             Teacher("Dr. H", "Advanced DBMS", true)
         )
@@ -53,25 +53,25 @@ class TeachersList {
 
     fun loadISLTeachers() : List<Teacher> {
         return listOf(
-            Teacher("Dr. Charu", "Information Security Lab", true)
+            Teacher("Dr. Charu", "IS Lab", true)
         )
     }
 
     fun loadDMLTeachers() : List<Teacher> {
         return listOf(
-            Teacher("Dr. Mugdha", "Data Mining", true)
+            Teacher("Dr. Mugdha", "DM Lab", true)
         )
     }
 
     fun loadWCLTeachers() : List<Teacher> {
         return listOf(
-            Teacher("Dr. Dinesh", "Wireless Communication Lab", true)
+            Teacher("Dr. Dinesh", "WC Lab", true)
         )
     }
 
     fun loadSTLTeachers() : List<Teacher> {
         return listOf(
-            Teacher("Dr. Vishal", "Software Testing", true)
+            Teacher("Dr. Vishal", "ST Lab", true)
         )
     }
 }
