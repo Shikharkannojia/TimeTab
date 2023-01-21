@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bpitindia.myapplication.data.AllTeachers
 import com.bpitindia.myapplication.entity.Teacher
 import com.bpitindia.myapplication.recyclerview.TeacherAvailabilityAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -24,18 +25,20 @@ class Launcher : AppCompatActivity() {
         layoutManager = LinearLayoutManager(this)
         createIcon = findViewById(R.id.create_icon)
 
-        val list =  ArrayList<Teacher>()
 
-        val p1 = Teacher("Dr. Mugdha", "Data Mining", false)
-        val p2 = Teacher("Dr. Charu", "IS Lab (G1)", false)
-        val p3 = Teacher("Dr. Mugdha", "DM Lab", false)
-        val p4 = Teacher("Dr. Charu", "Information Security", false)
-        val p5 = Teacher("Dr. Mugdha", "Data Mining", false)
-        val p6 = Teacher("Dr. Charu", "IS Lab (G1)", false)
-        val p7 = Teacher("Dr. Mugdha", "DM Lab", false)
-        val p8 = Teacher("Dr. Charu", "Information Security", false)
 
-        list.add(p1); list.add(p2); list.add(p3); list.add(p4); list.add(p5); list.add(p6); list.add(p7); list.add(p8)
+        val list = AllTeachers().loadTeachers()
+//
+//        val p1 = Teacher("Dr. Mugdha", "Data Mining", false)
+//        val p2 = Teacher("Dr. Charu", "IS Lab (G1)", false)
+//        val p3 = Teacher("Dr. Mugdha", "DM Lab", false)
+//        val p4 = Teacher("Dr. Charu", "Information Security", false)
+//        val p5 = Teacher("Dr. Mugdha", "Data Mining", false)
+//        val p6 = Teacher("Dr. Charu", "IS Lab (G1)", false)
+//        val p7 = Teacher("Dr. Mugdha", "DM Lab", false)
+//        val p8 = Teacher("Dr. Charu", "Information Security", false)
+//
+//        list.add(p1); list.add(p2); list.add(p3); list.add(p4); list.add(p5); list.add(p6); list.add(p7); list.add(p8)
 
         recyclerAdapter =
             TeacherAvailabilityAdapter(this, list)
