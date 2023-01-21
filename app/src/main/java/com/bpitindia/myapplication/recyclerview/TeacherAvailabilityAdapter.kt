@@ -9,32 +9,27 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bpitindia.myapplication.R
 import com.bpitindia.myapplication.entity.Teacher
 
-class TeacherAvailabilityAdapter(private val teacherSet : List<Teacher>
-                                 ): RecyclerView.Adapter<TeacherAvailabilityAdapter.TeacherViewHolder>() {
+class TeacherAvailabilityAdapter(val context: Context, private val teacherSet : List<Teacher>
+): RecyclerView.Adapter<TeacherAvailabilityAdapter.TeacherViewHolder>() {
 
+
+    class TeacherViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeacherViewHolder {
-        val adapterLayout = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_teacher_availability, parent, false)
-
-        return TeacherViewHolder(adapterLayout)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_teacher_availability, parent, false)
+        return TeacherViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: TeacherViewHolder, position: Int) {
-        val item = teacherSet[position]
-        holder.teacher_switch.text = item.name
-        holder.teacher_switch.setOnCheckedChangeListener { _, isChecked ->
-            item.isAvailable = isChecked
-        }
-    }
-
-    override fun getItemCount() = teacherSet.size
-
-    class TeacherViewHolder(private val view : View) : RecyclerView.ViewHolder(view) {
-        val teacher_switch : Switch = view.findViewById(R.id.teacher_availability)
 
     }
 
-
-
+    override fun getItemCount(): Int {
+        return teacherSet.size
+    }
 }
+
+
