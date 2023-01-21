@@ -1,5 +1,6 @@
 package com.bpitindia.myapplication
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -12,9 +13,14 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bpitindia.myapplication.data.AllTeachers
+import com.bpitindia.myapplication.data.MondayLectures
 import com.bpitindia.myapplication.databinding.ActivityMainBinding
+import com.bpitindia.myapplication.entity.Teacher
+import com.bpitindia.myapplication.recyclerview.MainRecyclerAdapter
+import com.bpitindia.myapplication.recyclerview.TeacherAvailabilityAdapter
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,20 +33,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.appBarMain.toolbar)
 
-
         val teacherData = AllTeachers().loadTeachers()
-
-
-
-
-
-
-
-
-
-
-
-
 
         binding.appBarMain.fab.setOnClickListener { _ ->
             val intent = Intent(this@MainActivity, TimeTable::class.java)
