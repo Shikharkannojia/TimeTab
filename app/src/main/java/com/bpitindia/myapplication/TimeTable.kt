@@ -2,12 +2,15 @@ package com.bpitindia.myapplication
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bpitindia.myapplication.ui.ui.fragments.*
+import java.time.LocalDate
 
 
 class TimeTable : AppCompatActivity() {
@@ -27,20 +30,74 @@ class TimeTable : AppCompatActivity() {
         thursday = findViewById(R.id.thursday)
         friday = findViewById(R.id.friday)
 
+
+        val today = "${LocalDate.now().dayOfWeek.name} is today!!! The ${LocalDate.now().dayOfWeek.value}th day"
+
+        Log.d("d/tag", today)
+
+        Toast.makeText(this, today, Toast.LENGTH_SHORT).show()
+
+
         if (savedInstanceState == null) {
-            monday.setTextColor(Color.BLACK)
+            monday.setTextColor(Color.parseColor("#009688"))
             tuesday.setTextColor(Color.parseColor("#009688"))
             wednesday.setTextColor(Color.parseColor("#009688"))
             thursday.setTextColor(Color.parseColor("#009688"))
             friday.setTextColor(Color.parseColor("#009688"))
 
-
             //put a switch statement here to open the fragment of the day it is today in place
-            //of line 42, 43
+            //1 - monday.....................6 - saturday
+            when(LocalDate.now().dayOfWeek.value) {
+                2 -> {
+                    monday.setTextColor(Color.parseColor("#009688"))
+                    tuesday.setTextColor(Color.BLACK)
+                    wednesday.setTextColor(Color.parseColor("#009688"))
+                    thursday.setTextColor(Color.parseColor("#009688"))
+                    friday.setTextColor(Color.parseColor("#009688"))
 
+                    supportFragmentManager.beginTransaction().replace(R.id.frame, Tuesday()).commit()
+                }
 
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.frame, Monday()).commit()
+                3 -> {
+                    monday.setTextColor(Color.parseColor("#009688"))
+                    wednesday.setTextColor(Color.BLACK)
+                    tuesday.setTextColor(Color.parseColor("#009688"))
+                    thursday.setTextColor(Color.parseColor("#009688"))
+                    friday.setTextColor(Color.parseColor("#009688"))
+
+                    supportFragmentManager.beginTransaction().replace(R.id.frame, Wednesday()).commit()
+                }
+
+                4 -> {
+                    monday.setTextColor(Color.parseColor("#009688"))
+                    thursday.setTextColor(Color.BLACK)
+                    wednesday.setTextColor(Color.parseColor("#009688"))
+                    tuesday.setTextColor(Color.parseColor("#009688"))
+                    friday.setTextColor(Color.parseColor("#009688"))
+
+                    supportFragmentManager.beginTransaction().replace(R.id.frame, Thursday()).commit()
+                }
+
+                5 -> {
+                    monday.setTextColor(Color.parseColor("#009688"))
+                    friday.setTextColor(Color.BLACK)
+                    wednesday.setTextColor(Color.parseColor("#009688"))
+                    thursday.setTextColor(Color.parseColor("#009688"))
+                    tuesday.setTextColor(Color.parseColor("#009688"))
+
+                    supportFragmentManager.beginTransaction().replace(R.id.frame, Friday()).commit()
+                }
+
+                else -> {
+                    tuesday.setTextColor(Color.parseColor("#009688"))
+                    monday.setTextColor(Color.BLACK)
+                    wednesday.setTextColor(Color.parseColor("#009688"))
+                    thursday.setTextColor(Color.parseColor("#009688"))
+                    friday.setTextColor(Color.parseColor("#009688"))
+
+                    supportFragmentManager.beginTransaction().replace(R.id.frame, Monday()).commit()
+                }
+            }
         }
 
         monday.setTextColor(Color.BLACK)

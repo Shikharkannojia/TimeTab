@@ -2,6 +2,7 @@ package com.bpitindia.myapplication.recyclerview
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,12 +14,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bpitindia.myapplication.ActivityLeave
 import com.bpitindia.myapplication.R
 import com.bpitindia.myapplication.entity.Period
+import com.bpitindia.myapplication.utils.Helpers
+import java.time.LocalTime
 
 class MainRecyclerAdapter(
     val context: Context,
     private val itemList: List<Period>
 ) : RecyclerView.Adapter<MainRecyclerAdapter.MainViewHolder>() {
-    private var timeInMillis: Long = 0L
+    private var currentTime = LocalTime.now()
     class MainViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 //        var recyclerHome: RecyclerView = view.findViewById(R.id.recyclerRecyclerView)
         lateinit var layoutManager: RecyclerView.LayoutManager
@@ -47,10 +50,14 @@ class MainRecyclerAdapter(
         holder.room.text = "Room ${subject.room}"
         holder.time.text = "${subject.startTime.hour}:${subject.startTime.minute} - ${subject.endTime.hour}:${subject.endTime.minute}"
 
-//        holder.name.text = itemList[position].name
-//        holder.teacher.text = itemList[position].teacher
-//        holder.room.text = "Room ${itemList[position].room}"
-//        holder.time.text = itemList[position].time
+        val startTime = subject.startTime
+        val endTime = subject.endTime
+
+        if(Helpers().isCurrentTimeBetween(startTime, endTime, currentTime))
+            holder.lectureView.setBackgroundColor(Color.parseColor("#FAE75433"))
+
+
+
 
         holder.lectureView.setOnClickListener {
             val intent = Intent(context, ActivityLeave::class.java)
