@@ -1,15 +1,12 @@
 package com.bpitindia.myapplication
 
-import android.content.Intent
+import android.content.Context
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.bpitindia.myapplication.data.AllTeachers
-import com.bpitindia.myapplication.data.TeachersList
+import com.bpitindia.myapplication.database.DBOperations
+import com.bpitindia.myapplication.database.TeacherEntity
 import com.bpitindia.myapplication.databinding.ActivityLeaveBinding
-import com.bpitindia.myapplication.databinding.ActivityMainBinding
-import com.bpitindia.myapplication.entity.Teacher
 import java.time.LocalTime
 
 
@@ -55,7 +52,11 @@ class ActivityLeave: AppCompatActivity() {
         val startTime = intent.getSerializableExtra("startTime") as LocalTime
         val endTime = intent.getSerializableExtra("endTime") as LocalTime
 
-        val teachers : List<Teacher> = AllTeachers().loadTeachers()
+        val teachers = DBOperations.RetrieveTaskItems(this).execute().get()
+
+        for(i in teachers){
+            println(i.name + " -data- " + i.isAvailable)
+        }
 
 //        if(subjectName.equals("Data Mining")) teachers = TeachersList().loadDMTeachers()
 //
@@ -75,7 +76,7 @@ class ActivityLeave: AppCompatActivity() {
 //
 //        else if(subjectName.equals("ST Lab")) teachers = TeachersList().loadSTLTeachers()
 //
-//        else teachers = listOf(Teacher("Anonymous", subjectName!!, true))
+//        else teachers = listOf(TeacherEntity("Anonymous", subjectName!!, true))
 
 
         var suggestedList = ""
@@ -97,10 +98,10 @@ class ActivityLeave: AppCompatActivity() {
                                subject : String,
                                start : LocalTime,
                                end : LocalTime,
-                               teachersList : List<Teacher>) : List<Teacher>? {
+                               teachersList : List<TeacherEntity>) : List<TeacherEntity>? {
 
 
-        val suggestedTeachers = mutableListOf<Teacher>()
+        val suggestedTeachers = mutableListOf<TeacherEntity>()
         for(teacher in teachersList) {
             if(teacher.name != concernedTeacher && teacher.subject == subject && teacher.isAvailable){
                 suggestedTeachers.add(teacher)
@@ -110,7 +111,7 @@ class ActivityLeave: AppCompatActivity() {
         return suggestedTeachers.ifEmpty { null }
     }
 
-//    private fun suggestNonSubjectTeachers(concernedTeacher: Teacher,
+//    private fun suggestNonSubjectTeachers(concernedTeacher: TeacherEntity,
 //                                          start : LocalTime,
 //                                          end : LocalTime,
 //                                          teachersList: TeachersList

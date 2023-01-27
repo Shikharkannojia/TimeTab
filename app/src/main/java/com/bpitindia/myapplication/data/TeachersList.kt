@@ -1,77 +1,77 @@
 package com.bpitindia.myapplication.data
 
-import com.bpitindia.myapplication.entity.Teacher
+import com.bpitindia.myapplication.database.TeacherEntity
 
 class TeachersList {
 
-    fun loadDMTeachers() : List<Teacher> {
+    fun loadDMTeachers() : List<TeacherEntity> {
         return listOf(
             //Data Mining
-            Teacher("Dr. Mugdha", "Data Mining", true),
-            Teacher("Dr. Shweta", "Data Mining", true),
-            Teacher("Dr. A", "Data Mining", true)
+            TeacherEntity("1A", "Dr. Mugdha", "Data Mining", true),
+            TeacherEntity("1B", "Dr. Shweta", "Data Mining", true),
+            TeacherEntity("1C", "Dr. A", "Data Mining", true)
         )
     }
 
-    fun loadISTeachers() : List<Teacher> {
+    fun loadISTeachers() : List<TeacherEntity> {
         return listOf(
             //Information Security
-            Teacher("Dr. Charu", "Information Security", true),
-            Teacher("Dr. B", "Information Security", true),
-            Teacher("Dr. C", "Information Security", true),
-            Teacher("Dr. D", "Information Security", true)
+            TeacherEntity("2A", "Dr. Charu", "Information Security", true),
+            TeacherEntity("2B", "Dr. B", "Information Security", true),
+            TeacherEntity("2C", "Dr. C", "Information Security", true),
+            TeacherEntity("2D", "Dr. D", "Information Security", true)
         )
     }
 
-    fun loadSTTeachers() : List<Teacher> {
+    fun loadSTTeachers() : List<TeacherEntity> {
         return listOf(
             //Software Testing
-            Teacher("Dr. Vishal", "Software Testing", true),
-            Teacher("Dr. E", "Software Testing", true),
-            Teacher("Dr. F", "Software Testing", true)
+            TeacherEntity("3A", "Dr. Vishal", "Software Testing", true),
+            TeacherEntity("3B", "Dr. E", "Software Testing", true),
+            TeacherEntity("3C", "Dr. F", "Software Testing", true)
         )
     }
 
-    fun loadADBMSTeachers() : List<Teacher> {
+    fun loadADBMSTeachers() : List<TeacherEntity> {
         return listOf(
             //Advanced DBMS
-            Teacher("Ms. Deepti", "Advanced DBMS", true),
-            Teacher("Dr. G", "Advanced DBMS", true),
-            Teacher("Dr. H", "Advanced DBMS", true)
+            TeacherEntity("4A", "Ms. Deepti", "Advanced DBMS", true),
+            TeacherEntity("4B", "Dr. G", "Advanced DBMS", true),
+            TeacherEntity("4C", "Dr. H", "Advanced DBMS", true)
         )
     }
 
-    fun loadWCTeachers() : List<Teacher> {
+    fun loadWCTeachers() : List<TeacherEntity> {
         return listOf(
             //Wireless Communication
-            Teacher("Dr. Dinesh", "Wireless Communication", true),
-            Teacher("Dr. I", "Wireless Communication", true),
-            Teacher("Dr. J", "Wireless Communication", true),
-            Teacher("Dr. K", "Wireless Communication", true)
+            TeacherEntity("5A", "Dr. Dinesh", "Wireless Communication", true),
+            TeacherEntity("5B", "Dr. I", "Wireless Communication", true),
+            TeacherEntity("5C", "Dr. J", "Wireless Communication", true),
+            TeacherEntity("5D", "Dr. K", "Wireless Communication", true)
         )
     }
 
-    fun loadISLTeachers() : List<Teacher> {
+    fun loadISLTeachers() : List<TeacherEntity> {
         return listOf(
-            Teacher("Dr. Charu", "IS Lab", true)
+            TeacherEntity("2A", "Dr. Charu", "IS Lab", true)
         )
     }
 
-    fun loadDMLTeachers() : List<Teacher> {
+    fun loadDMLTeachers() : List<TeacherEntity> {
         return listOf(
-            Teacher("Dr. Mugdha", "DM Lab", true)
+            TeacherEntity("1A", "Dr. Mugdha", "DM Lab", true)
         )
     }
 
-    fun loadWCLTeachers() : List<Teacher> {
+    fun loadWCLTeachers() : List<TeacherEntity> {
         return listOf(
-            Teacher("Dr. Dinesh", "WC Lab", true)
+            TeacherEntity("5A", "Dr. Dinesh", "WC Lab", true)
         )
     }
 
-    fun loadSTLTeachers() : List<Teacher> {
+    fun loadSTLTeachers() : List<TeacherEntity> {
         return listOf(
-            Teacher("Dr. Vishal", "ST Lab", true)
+            TeacherEntity("3A", "Dr. Vishal", "ST Lab", true)
         )
     }
 }

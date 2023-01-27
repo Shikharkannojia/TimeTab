@@ -1,10 +1,8 @@
 package com.bpitindia.myapplication
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -13,14 +11,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.bpitindia.myapplication.data.AllTeachers
-import com.bpitindia.myapplication.data.MondayLectures
 import com.bpitindia.myapplication.databinding.ActivityMainBinding
-import com.bpitindia.myapplication.entity.Teacher
-import com.bpitindia.myapplication.recyclerview.MainRecyclerAdapter
-import com.bpitindia.myapplication.recyclerview.TeacherAvailabilityAdapter
 
 class MainActivity : AppCompatActivity() {
 

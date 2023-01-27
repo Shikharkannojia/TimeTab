@@ -34,6 +34,11 @@ class TimeTable : AppCompatActivity() {
             thursday.setTextColor(Color.parseColor("#009688"))
             friday.setTextColor(Color.parseColor("#009688"))
 
+
+            //put a switch statement here to open the fragment of the day it is today in place
+            //of line 42, 43
+
+
             supportFragmentManager.beginTransaction()
                 .replace(R.id.frame, Monday()).commit()
         }

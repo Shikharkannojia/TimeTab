@@ -4,14 +4,14 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Switch
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bpitindia.myapplication.R
-import com.bpitindia.myapplication.entity.Teacher
+import com.bpitindia.myapplication.database.DBOperations
+import com.bpitindia.myapplication.database.TeacherEntity
 import com.google.android.material.switchmaterial.SwitchMaterial
 
-class TeacherAvailabilityAdapter(val context: Context, private val teacherSet : List<Teacher>
+class TeacherAvailabilityAdapter(val context: Context, private val teacherSet : List<TeacherEntity>
 ): RecyclerView.Adapter<TeacherAvailabilityAdapter.TeacherViewHolder>() {
 
 
@@ -27,13 +27,20 @@ class TeacherAvailabilityAdapter(val context: Context, private val teacherSet : 
 
     override fun onBindViewHolder(holder: TeacherViewHolder, position: Int) {
         val item = teacherSet[position]
-        holder.availabilitySwitch.text = item.name
+        holder.availabilitySwitch.text = "${item.name} (${item.subject})"
         holder.availabilitySwitch.setOnCheckedChangeListener { _, isChecked ->
             item.isAvailable = isChecked
+
+
+            val teacherEntity = TeacherEntity(item.id, item.name, item.subject, isChecked)
+
+            DBOperations.DBAsyncTask1(context, teacherEntity, 3).execute()
+
+
             if(item.isAvailable)
-                Toast.makeText(context, "${item.name} is available", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "${item.name} is now available", Toast.LENGTH_SHORT).show()
             else
-                Toast.makeText(context, "${item.name} is unavailable", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "${item.name} is now unavailable", Toast.LENGTH_SHORT).show()
         }
     }
 

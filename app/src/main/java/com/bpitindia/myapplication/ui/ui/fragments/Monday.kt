@@ -1,25 +1,18 @@
 package com.bpitindia.myapplication.ui.ui.fragments
 
 import android.content.Context
-import android.os.AsyncTask
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
 import com.bpitindia.myapplication.R
-import com.bpitindia.myapplication.entity.Period
 import com.bpitindia.myapplication.data.MondayLectures
-import com.bpitindia.myapplication.database.TeacherDatabase
+import com.bpitindia.myapplication.database.DBOperations
 import com.bpitindia.myapplication.database.TeacherEntity
-import com.bpitindia.myapplication.entity.Teacher
-import com.bpitindia.myapplication.ui.ui.fragments.Monday
 import com.bpitindia.myapplication.recyclerview.MainRecyclerAdapter
-import java.time.LocalTime
 
 //import com.google.firebase.database.DataSnapshot
 //import com.google.firebase.database.DatabaseError
@@ -76,14 +69,14 @@ class Monday : Fragment() {
             val isAvailable = true
 
             val teacherEntity = TeacherEntity("$i", name, subject, isAvailable)
-            val async = DBAsyncTask1(
+            val async = DBOperations.DBAsyncTask1(
                 activity as Context,
                 teacherEntity,
                 1
             ).execute()
         }
 
-        val list1 = RetrieveTaskItems(activity as Context).execute().get()
+        val list1 = DBOperations.RetrieveTaskItems(activity as Context).execute().get()
 
         for(i in list1){
             println(i.name + " __________________ Database Operation")
@@ -150,37 +143,4 @@ class Monday : Fragment() {
             }
     }
 
-    class DBAsyncTask1(val context: Context, val teacherEntity: TeacherEntity, private val mode: Int) :
-        AsyncTask<Void, Void, Boolean>() {
-
-        override fun doInBackground(vararg params: Void?): Boolean {
-            val db = Room.databaseBuilder(context, TeacherDatabase::class.java, "Teacher-Db").build()
-
-            when (mode) {
-                1 -> {
-                    try {
-                        db.teacherDao().insertTeacher(teacherEntity)
-                        db.close()
-                        return true
-                    }catch (e: Exception){
-                        return false
-                    }
-                }
-                2 -> {
-                    db.teacherDao().deleteTeacher(teacherEntity)
-                    db.close()
-                    return true
-                }
-            }
-            return false
-        }
-    }
-    class RetrieveTaskItems(val context: Context) : AsyncTask<Void, Void, List<TeacherEntity>>() {
-        override fun doInBackground(vararg params: Void?): List<TeacherEntity> {
-            val db = Room.databaseBuilder(context, TeacherDatabase::class.java, "Teacher-Db").build()
-            val ret = db.teacherDao().getAllTeachers()
-            db.close()
-            return ret
-        }
-    }
 }

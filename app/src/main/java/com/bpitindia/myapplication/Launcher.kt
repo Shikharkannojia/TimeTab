@@ -1,12 +1,14 @@
 package com.bpitindia.myapplication
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bpitindia.myapplication.data.AllTeachers
-import com.bpitindia.myapplication.entity.Teacher
+import com.bpitindia.myapplication.database.DBOperations
+import com.bpitindia.myapplication.database.TeacherEntity
 import com.bpitindia.myapplication.recyclerview.TeacherAvailabilityAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -28,6 +30,22 @@ class Launcher : AppCompatActivity() {
 
 
         val list = AllTeachers().loadTeachers()
+
+        for(i in list.indices){
+            val id = list[i].id
+            val name = list[i].name
+            val subject = list[i].subject
+            val isAvailable = list[i].isAvailable
+
+            val teacherEntity = TeacherEntity(id, name, subject, isAvailable)
+            val async = DBOperations.DBAsyncTask1(
+                this,
+                teacherEntity,
+                1
+            ).execute()
+        }
+
+
 //
 //        val p1 = Teacher("Dr. Mugdha", "Data Mining", false)
 //        val p2 = Teacher("Dr. Charu", "IS Lab (G1)", false)
