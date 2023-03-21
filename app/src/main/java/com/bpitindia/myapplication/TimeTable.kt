@@ -31,7 +31,7 @@ class TimeTable : AppCompatActivity() {
         friday = findViewById(R.id.friday)
 
 
-        val today = "${LocalDate.now().dayOfWeek.name} is today!!! The ${LocalDate.now().dayOfWeek.value}th day"
+        val today = "Today is ${LocalDate.now().dayOfWeek.name}!!! The ${LocalDate.now().dayOfWeek.value}th day"
 
         Log.d("d/tag", today)
 
@@ -39,12 +39,6 @@ class TimeTable : AppCompatActivity() {
 
 
         if (savedInstanceState == null) {
-            monday.setTextColor(Color.parseColor("#009688"))
-            tuesday.setTextColor(Color.parseColor("#009688"))
-            wednesday.setTextColor(Color.parseColor("#009688"))
-            thursday.setTextColor(Color.parseColor("#009688"))
-            friday.setTextColor(Color.parseColor("#009688"))
-
             //put a switch statement here to open the fragment of the day it is today in place
             //1 - monday.....................6 - saturday
             when(LocalDate.now().dayOfWeek.value) {
@@ -100,7 +94,6 @@ class TimeTable : AppCompatActivity() {
             }
         }
 
-        monday.setTextColor(Color.BLACK)
         monday.setOnClickListener {
             monday.setTextColor(Color.BLACK)
             tuesday.setTextColor(Color.parseColor("#009688"))
