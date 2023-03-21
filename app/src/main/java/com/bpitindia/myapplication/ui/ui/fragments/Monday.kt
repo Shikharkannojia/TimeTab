@@ -9,15 +9,16 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bpitindia.myapplication.R
-import com.bpitindia.myapplication.data.MondayLectures
+//import com.bpitindia.myapplication.data.MondayLectures
 import com.bpitindia.myapplication.database.DBOperations
 import com.bpitindia.myapplication.database.TeacherEntity
+import com.bpitindia.myapplication.entity.Period
 import com.bpitindia.myapplication.recyclerview.MainRecyclerAdapter
-
-//import com.google.firebase.database.DataSnapshot
-//import com.google.firebase.database.DatabaseError
-//import com.google.firebase.database.FirebaseDatabase
-//import com.google.firebase.database.ValueEventListener
+import com.google.firebase.FirebaseApp
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import java.time.LocalTime
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -56,31 +57,28 @@ class Monday : Fragment() {
         recyclerHome = view.findViewById(R.id.recyclerHome)
         layoutManager = LinearLayoutManager(activity)
 
-    /*    val database = FirebaseDatabase.getInstance()
-        val myRef = database.getReference("App")
-*/
-
 //        val currentTime = LocalTime.of(9,0)
-        val list = MondayLectures().loadLectures()
+//        val list = MondayLectures().loadLectures()
 
-        for(i in list.indices){
-            val name = list[i].name
-            val subject = list[i].teacher
-            val isAvailable = true
-
-            val teacherEntity = TeacherEntity("$i", name, subject, isAvailable)
-            val async = DBOperations.DBAsyncTask1(
-                activity as Context,
-                teacherEntity,
-                1
-            ).execute()
-        }
+//        for(i in list.indices){
+//            val name = list[i].name
+//            val subject = list[i].teacher
+//            val isAvailable = true
+//
+//            val teacherEntity = TeacherEntity("$i", name, subject, isAvailable)
+//            val async = DBOperations.DBAsyncTask1(
+//                activity as Context,
+//                teacherEntity,
+//                1
+//            ).execute()
+//        }
+        val list:ArrayList<Period> = java.util.ArrayList()
 
         val list1 = DBOperations.RetrieveTaskItems(activity as Context).execute().get()
-
-        for(i in list1){
-            println(i.name + " __________________ Database Operation")
-        }
+//
+//        for(i in list1){
+//            println(i.name + " __________________ Database Operation")
+//        }
 //        val p1 = Period("Data Mining", "403", "Dr. Mugdha", "9:30 - 11:10")
 //        val p2 = Period("IS Lab (G1)", "108B", "Dr. Charu", "11:10 - 12:50")
 //        val p3 = Period("DM Lab (G2)", "108C", "Dr. Mugdha", "11:10 - 12:50")
@@ -89,36 +87,43 @@ class Monday : Fragment() {
 //        val p6 = Period("Library", "Lib", "Library Assistant", "4:10 - 5:00")
 //
 //        list.add(p1); list.add(p2); list.add(p3); list.add(p4); list.add(p5); list.add(p6)
-//        for(i in 1..6){
-//            val str = "P$i"
-//            var name = ""
-//            var room = ""
-//            var teacher = ""
-//            var time = ""
+
+        val database = Firebase.database
+        val myRef = database.getReference("App")
+
+        for(i in 1..6){
+            val str = "P$i"
+            var name = ""
+            var room = ""
+            var teacher = ""
+            var time = ""
+
+            myRef.child("TimeTable").child("Monday").child(str).get().addOnSuccessListener {
+                name = it.child("Name").value.toString()
+                room = it.child("Room").value.toString()
+                teacher = it.child("Teacher").value.toString()
+                time = it.child("Time").value.toString()
+//                "${subject.startTime.hour}:${subject.startTime.minute} - ${subject.endTime.hour}:${subject.endTime.minute}"
+                val p1 = Period(name,room,teacher, LocalTime.MAX, LocalTime.MAX)
+                println("__________________" + p1.name + ", " + p1.room + ", " + p1.teacher )
+                list.add(p1)
+            }.addOnFailureListener{
+                println("*****************************************************")
+            }
+        }
+
+        myRef.child("TimeTable").child("Monday").get().addOnSuccessListener {
+            println(list)
+            recyclerAdapter =
+                MainRecyclerAdapter(activity as Context, list)
+            recyclerHome.adapter = recyclerAdapter
+            recyclerHome.layoutManager = layoutManager
+        }
 //
-//            myRef.child("TimeTable").child("Monday").child(str).get().addOnSuccessListener {
-//                name = it.child("Name").value.toString()
-//                room = it.child("Room").value.toString()
-//                teacher = it.child("Teacher").value.toString()
-//                time = it.child("Time").value.toString()
-//                val p1 = Period(name,room,teacher,time)
-//                println("___________________" + p1.name + ", " + p1.room + ", " + p1.teacher + ", " + p1.time)
-//                list.add(p1)
-//            }
-//        }
-
-//        myRef.child("TimeTable").child("Monday").get().addOnSuccessListener {
-//            println(list)
-//            recyclerAdapter =
-//                MainRecyclerAdapter(activity as Context, list)
-//            recyclerHome.adapter = recyclerAdapter
-//            recyclerHome.layoutManager = layoutManager
-//        }
-
-        recyclerAdapter =
-            MainRecyclerAdapter(activity as Context, list)
-        recyclerHome.adapter = recyclerAdapter
-        recyclerHome.layoutManager = layoutManager
+//        recyclerAdapter =
+//            MainRecyclerAdapter(activity as Context, list)
+//        recyclerHome.adapter = recyclerAdapter
+//        recyclerHome.layoutManager = layoutManager
 
         return view
     }
