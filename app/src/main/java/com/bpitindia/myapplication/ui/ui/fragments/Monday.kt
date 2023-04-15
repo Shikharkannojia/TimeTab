@@ -15,7 +15,7 @@ import com.bpitindia.myapplication.database.TeacherEntity
 import com.bpitindia.myapplication.entity.Period
 import com.bpitindia.myapplication.recyclerview.MainRecyclerAdapter
 import com.google.firebase.FirebaseApp
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import java.time.LocalTime
@@ -72,7 +72,6 @@ class Monday : Fragment() {
 //                1
 //            ).execute()
 //        }
-        val list:ArrayList<Period> = java.util.ArrayList()
 
         val list1 = DBOperations.RetrieveTaskItems(activity as Context).execute().get()
 //
@@ -87,38 +86,25 @@ class Monday : Fragment() {
 //        val p6 = Period("Library", "Lib", "Library Assistant", "4:10 - 5:00")
 //
 //        list.add(p1); list.add(p2); list.add(p3); list.add(p4); list.add(p5); list.add(p6)
-
         val database = Firebase.database
-        val myRef = database.getReference("App")
-
-        for(i in 1..6){
-            val str = "P$i"
-            var name = ""
-            var room = ""
-            var teacher = ""
-            var time = ""
-
-            myRef.child("TimeTable").child("Monday").child(str).get().addOnSuccessListener {
-                name = it.child("Name").value.toString()
-                room = it.child("Room").value.toString()
-                teacher = it.child("Teacher").value.toString()
-                time = it.child("Time").value.toString()
-//                "${subject.startTime.hour}:${subject.startTime.minute} - ${subject.endTime.hour}:${subject.endTime.minute}"
-                val p1 = Period(name,room,teacher, LocalTime.MAX, LocalTime.MAX)
-                println("__________________" + p1.name + ", " + p1.room + ", " + p1.teacher )
-                list.add(p1)
-            }.addOnFailureListener{
-                println("*****************************************************")
+        val myRef1 = database.getReference("App").child("TimeTable").child("Monday")
+        myRef1.addChildEventListener(object : ChildEventListener {
+            var size = 0
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                size++
+                getFirebase(size)
             }
-        }
 
-        myRef.child("TimeTable").child("Monday").get().addOnSuccessListener {
-            println(list)
-            recyclerAdapter =
-                MainRecyclerAdapter(activity as Context, list)
-            recyclerHome.adapter = recyclerAdapter
-            recyclerHome.layoutManager = layoutManager
-        }
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {}
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {}
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle any errors that may occur
+            }
+        })
 //
 //        recyclerAdapter =
 //            MainRecyclerAdapter(activity as Context, list)
@@ -126,6 +112,46 @@ class Monday : Fragment() {
 //        recyclerHome.layoutManager = layoutManager
 
         return view
+    }
+
+    fun getFirebase(size:Int){
+        val list:ArrayList<Period> = java.util.ArrayList()
+        val database = Firebase.database
+        val myRef = database.getReference("App")
+        for(i in 1..size){
+            val str = "P$i"
+            var name = ""
+            var room = ""
+            var teacher = ""
+            var time = ""
+
+            myRef.child("TimeTable").child("Monday").child(str).get().addOnSuccessListener {
+                name = it.child("Subject").value.toString()
+                room = it.child("Room").value.toString()
+                teacher = it.child("Teacher").value.toString()
+                time = it.child("Time").value.toString()
+
+
+                var time1 = ""
+                var time2 = ""
+
+                if(time != "null"){
+                    time1 = time.substring(0,5)
+                    time2 = time.substring(8,time.length)
+                }
+
+//                "${subject.startTime.hour}:${subject.startTime.minute} - ${subject.endTime.hour}:${subject.endTime.minute}"
+                val p1 = Period(name,room,teacher, LocalTime.parse(time1), LocalTime.parse(time2))
+                list.add(p1)
+            }.addOnFailureListener{}
+        }
+
+        myRef.child("TimeTable").child("Monday").get().addOnSuccessListener {
+            recyclerAdapter =
+                MainRecyclerAdapter(activity as Context, list)
+            recyclerHome.adapter = recyclerAdapter
+            recyclerHome.layoutManager = layoutManager
+        }
     }
 
     companion object {

@@ -12,6 +12,14 @@ import com.bpitindia.myapplication.R
 import com.bpitindia.myapplication.data.TuesdayLectures
 import com.bpitindia.myapplication.entity.Period
 import com.bpitindia.myapplication.recyclerview.MainRecyclerAdapter
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import java.time.LocalTime
+
 //import com.google.firebase.database.FirebaseDatabase
 
 // TODO: Rename parameter arguments, choose names that match
@@ -53,7 +61,7 @@ class Tuesday : Fragment() {
 //        val database = FirebaseDatabase.getInstance()
 //        val myRef = database.getReference("App")
 
-        val list = TuesdayLectures().loadLectures()
+//        val list = TuesdayLectures().loadLectures()
 //        val p1 = Period("Information Security", "SH1-B", "Dr. Charu", "9:30 - 11:10")
 //        val p2 = Period("ST Lab (G1)", "401A", "Dr. Vishal", "11:10 - 12:50")
 //        val p3 = Period("WC Lab (G2)", "108A", "Dr. Dinesh", "11:10 - 12:50")
@@ -83,11 +91,70 @@ class Tuesday : Fragment() {
 //        }
 
 
-        recyclerAdapter =
-            MainRecyclerAdapter(activity as Context, list)
-        recyclerHome.adapter = recyclerAdapter
-        recyclerHome.layoutManager = layoutManager
+//        recyclerAdapter =
+//            MainRecyclerAdapter(activity as Context, list)
+//        recyclerHome.adapter = recyclerAdapter
+//        recyclerHome.layoutManager = layoutManager
+
+        val database = Firebase.database
+        val myRef1 = database.getReference("App").child("TimeTable").child("Tuesday")
+        myRef1.addChildEventListener(object : ChildEventListener {
+            var size = 0
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                size++
+                getFirebase(size)
+            }
+
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {}
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {}
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle any errors that may occur
+            }
+        })
         return view
+    }
+
+    fun getFirebase(size:Int){
+        val list:ArrayList<Period> = java.util.ArrayList()
+        val database = Firebase.database
+        val myRef = database.getReference("App")
+        for(i in 1..size){
+            val str = "P$i"
+            var name = ""
+            var room = ""
+            var teacher = ""
+            var time = ""
+
+            myRef.child("TimeTable").child("Tuesday").child(str).get().addOnSuccessListener {
+                name = it.child("Subject").value.toString()
+                room = it.child("Room").value.toString()
+                teacher = it.child("Teacher").value.toString()
+                time = it.child("Time").value.toString()
+
+
+                var time1 = ""
+                var time2 = ""
+
+                if(time != "null"){
+                    time1 = time.substring(0,5)
+                    time2 = time.substring(8,time.length)
+                }
+//                "${subject.startTime.hour}:${subject.startTime.minute} - ${subject.endTime.hour}:${subject.endTime.minute}"
+                val p1 = Period(name,room,teacher, LocalTime.parse(time1), LocalTime.parse(time2))
+                list.add(p1)
+            }.addOnFailureListener{}
+        }
+
+        myRef.child("TimeTable").child("Tuesday").get().addOnSuccessListener {
+            recyclerAdapter =
+                MainRecyclerAdapter(activity as Context, list)
+            recyclerHome.adapter = recyclerAdapter
+            recyclerHome.layoutManager = layoutManager
+        }
     }
 
     companion object {
