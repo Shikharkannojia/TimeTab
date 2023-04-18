@@ -48,7 +48,42 @@ class MainRecyclerAdapter(
         holder.name.text = subject.name
         holder.teacher.text = subject.teacher
         holder.room.text = "Room ${subject.room}"
-        holder.time.text = "${subject.startTime.hour}:${subject.startTime.minute} - ${subject.endTime.hour}:${subject.endTime.minute}"
+        var sHour = "${subject.startTime.hour}"
+        var sMinute = "${subject.startTime.minute}"
+        var eHour = "${subject.endTime.hour}"
+        var eMinute = "${subject.endTime.minute}"
+
+        if(subject.startTime.minute < 10)sMinute = "0$sMinute"
+        if(subject.endTime.minute < 10)eMinute = "0$eMinute"
+
+        if(subject.startTime.hour > 12){
+            sHour = "${subject.startTime.hour - 12}"
+            sMinute += " PM"
+        }else if(subject.startTime.hour == 0){
+            sHour = "12"
+            sMinute += " AM"
+        }else{
+            if(subject.startTime.hour == 12)sMinute += " PM"
+            else sMinute += " AM"
+        }
+
+        if(subject.endTime.hour > 12){
+            eHour = "${subject.endTime.hour - 12}"
+            eMinute += " PM"
+        }else if(subject.endTime.hour == 0){
+            eHour = "12"
+            eMinute += " AM"
+        }else{
+            if(subject.endTime.hour == 12)eMinute += " PM"
+            else eMinute += " AM"
+        }
+
+        if(subject.startTime.hour < 10 && subject.startTime.hour != 0)sHour = "0$sHour"
+        if(subject.endTime.hour < 10 && subject.endTime.hour != 0)eHour = "0$eHour"
+
+        holder.time.text = "${sHour}:${sMinute} - ${eHour}:${eMinute}"
+//
+//        holder.time.text = "${subject.startTime.hour}:${subject.startTime.minute} - ${subject.endTime.hour}:${subject.endTime.minute}"
 
         val startTime = subject.startTime
         val endTime = subject.endTime
